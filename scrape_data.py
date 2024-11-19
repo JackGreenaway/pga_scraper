@@ -16,12 +16,12 @@ def parse_cli() -> argparse.ArgumentParser:
 
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument(
-        "--id", type=str, help="api header id for results", action="append")
+        "--id", type=str, help="desired tournamentPastResultsId. Example: 'R2024100'", action="append")
     group.add_argument("-j", "--json", type=str,
-                       help="api header id for results")
+                       help="json file containing key value pairs of tournamentPastResultsId: tournament name. Example: 'tournament_keys.json'")
 
     parser.add_argument("-s", "--save_name", type=str,
-                        help="name to save file as", required=True)
+                        help="name to save output file as. Example: 'tournament_results'", required=True)
 
     parser.add_argument("-yr", "--year_range", type=str,
                         help="year range to collect data for. Example: '2010-2020'", required=True)
