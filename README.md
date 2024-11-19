@@ -34,8 +34,12 @@ options:
 
 Using a `.json` file to define the torunaments to collect  
 
-`uv run .\scrape_data.py --json tournament_keys.json -s major_comp_results -yr 1990-2024` 
+```
+uv run .\scrape_data.py --json tournament_keys.json -s major_comp_results -yr 1990-2024
+``` 
 
 Manually defining tournaments to collect
 
-`uv run .\scrape_data.py --id R2024100 --id R2023014 --id R2024026 --id R2024011 -s major_comp_results -yr 1990-2024`
+```
+uv run .\scrape_data.py --id R2024100 --id R2023014 --id R2024026 --id R2024011 -s major_comp_results -yr 1990-2024
+```
