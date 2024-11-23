@@ -16,6 +16,8 @@ It leverages the backend GraphQL requests that the website sends to collect info
 ### Setup
 This repo uses the [uv](https://github.com/astral-sh/uv) package manager becuase everything else is just a faff.
 
+To run the `script_data.py` file first install `uv` with `pip install uv` and then run `uv sync` to set up the environment.
+
 ---
 ### Example Usage
 ```
