@@ -20,7 +20,7 @@ To run the `script_data.py` file first install `uv` with `pip install uv` and th
 
 ---
 ### Example Usage
-```
+```bash
 usage: scrape_data.py [-h] (--id ID | -j JSON) -s SAVE_NAME -yr YEAR_RANGE
 
 options:
@@ -34,14 +34,20 @@ options:
                         year range to collect data for. Example: '2010-2020'
 ```
 
-Using a `.json` file to define the torunaments to collect  
+Using a `.json` file to define the tournaments to collect  
 
-```
-uv run .\scrape_data.py --json tournament_keys.json -s major_comp_results -yr 1990-2024
+```bash
+uv run scrape_data.py --json tournament_keys.json -s major_comp_results -yr 1990-2024
 ``` 
+
+Using `get_tournament_keys.py` to automatically collect tournament key values
+
+```bash
+uv run get_tournament_keys.py -url "https://www.pgatour.com/schedule"
+```
 
 Manually defining tournaments to collect
 
-```
-uv run .\scrape_data.py --id R2024100 --id R2023014 --id R2024026 --id R2024011 -s major_comp_results -yr 1990-2024
+```bash
+uv run scrape_data.py --id R2024100 --id R2023014 --id R2024026 --id R2024011 -s major_comp_results -yr 1990-2024
 ```

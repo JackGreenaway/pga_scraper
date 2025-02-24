@@ -5,12 +5,14 @@ build/
 dist/
 wheels/
 *.egg-info
+hello.py
 
 # my files
 *.pq
 *.paqruet
 *.ipynb
 constants.py
+*.log
 
 # Virtual environments
 .venv
