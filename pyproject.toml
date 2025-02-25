@@ -9,12 +9,16 @@ dependencies = [
     "numpy>=2.1.3",
     "pandas>=2.2.3",
     "tqdm>=4.67.1",
+    "bs4>=0.0.2",
+    "requests>=2.32.3",
 ]
 
 [dependency-groups]
 dev = [
     "matplotlib>=3.9.2",
-    "bs4>=0.0.2",
     "ipykernel>=6.29.5",
-    "requests>=2.32.3",
+    "scipy>=1.15.2",
+    "seaborn>=0.13.2",
+    "statsmodels>=0.14.4",
+    "black>=25.1.0",
 ]
