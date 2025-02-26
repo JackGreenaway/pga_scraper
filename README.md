@@ -16,7 +16,7 @@ It leverages the backend GraphQL requests that the website sends to collect info
 ### Setup
 This repo uses the [uv](https://github.com/astral-sh/uv) package manager becuase everything else is just a faff.
 
-To run the `script_data.py` file first install `uv` with `pip install uv` and then run `uv sync` to set up the environment.
+To run the `script_data.py` file first install `uv` with `pip install uv` and then run one of the scripts. Executing `uv run <script>.py` will automatically configure the environment. 
 
 ---
 ### Example Usage
@@ -40,10 +40,10 @@ Using a `.json` file to define the tournaments to collect
 uv run scrape_data.py --json tournament_keys.json -s major_comp_results -yr 1990-2024
 ``` 
 
-Using `get_tournament_keys.py` to automatically collect tournament key values
+Using `get_tournament_keys.py` to automatically collect tournament key values and store them in a `.json` file
 
 ```bash
-uv run get_tournament_keys.py -url "https://www.pgatour.com/schedule"
+uv run get_tournament_keys.py --url "https://www.pgatour.com/schedule"
 ```
 
 Manually defining tournaments to collect
@@ -51,3 +51,9 @@ Manually defining tournaments to collect
 ```bash
 uv run scrape_data.py --id R2024100 --id R2023014 --id R2024026 --id R2024011 -s major_comp_results -yr 1990-2024
 ```
+
+---
+### Limitations
+The `get_tournament_keys.py` scraper assumes that all past and present tournaments are currently listed on the PGA tour schedule website. It has a survivourship bias. 
+
+For example, The Buick Open, stopped in 2009 and is not currently listed on the schedule. Therefore, the key for this tournament is not collected (nor do I think it can be collected from the PGA website regardless).

@@ -814,20 +814,23 @@ dependencies = [
     { name = "fastparquet" },
     { name = "numpy" },
     { name = "pandas" },
-    { name = "polars" },
-    { name = "polars-ols" },
     { name = "requests" },
     { name = "tqdm" },
 ]
 
 [package.dev-dependencies]
-dev = [
+analysis = [
     { name = "black" },
     { name = "ipykernel" },
     { name = "matplotlib" },
+    { name = "polars" },
+    { name = "polars-ols" },
     { name = "scipy" },
     { name = "seaborn" },
     { name = "statsmodels" },
+]
+dev = [
+    { name = "ipykernel" },
 ]
 
 [package.metadata]
@@ -836,21 +839,22 @@ requires-dist = [
     { name = "fastparquet", specifier = ">=2024.11.0" },
     { name = "numpy", specifier = ">=2.1.3" },
     { name = "pandas", specifier = ">=2.2.3" },
-    { name = "polars", specifier = ">=1.23.0" },
-    { name = "polars-ols", specifier = ">=0.3.5" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "tqdm", specifier = ">=4.67.1" },
 ]
 
 [package.metadata.requires-dev]
-dev = [
+analysis = [
     { name = "black", specifier = ">=25.1.0" },
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "matplotlib", specifier = ">=3.9.2" },
+    { name = "polars", specifier = ">=1.23.0" },
+    { name = "polars-ols", specifier = ">=0.3.5" },
     { name = "scipy", specifier = ">=1.15.2" },
     { name = "seaborn", specifier = ">=0.13.2" },
     { name = "statsmodels", specifier = ">=0.14.4" },
 ]
+dev = [{ name = "ipykernel", specifier = ">=6.29.5" }]
 
 [[package]]
 name = "pillow"
