@@ -7,7 +7,7 @@ import logging
 
 from constants import api_key
 from tqdm import tqdm
-from formatter import clean_data
+from utils.formatter import clean_data
 from utils import (
     get_payload,
     format_frame,
