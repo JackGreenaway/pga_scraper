@@ -11,6 +11,7 @@ hello.py
 *.pq
 *.paqruet
 *.ipynb
+!analysis.ipynb
 constants.py
 *.log
 
