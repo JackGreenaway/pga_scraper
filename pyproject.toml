@@ -26,4 +26,6 @@ analysis = [
     "scipy>=1.15.2",
     "seaborn>=0.13.2",
     "statsmodels>=0.14.4",
+    "altair>=5.5.0",
+    "pyarrow>=19.0.1",
 ]
