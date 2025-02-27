@@ -8,7 +8,7 @@ import logging
 from constants import api_key
 from tqdm import tqdm
 from utils.formatter import clean_data
-from utils import (
+from utils.utils import (
     get_payload,
     format_frame,
     get_tournament_years,
