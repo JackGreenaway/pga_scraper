@@ -3,6 +3,7 @@ __pycache__/
 *.py[oc]
 build/
 dist/
+data/
 wheels/
 *.egg-info
 hello.py
@@ -17,3 +18,4 @@ constants.py
 
 # Virtual environments
 .venv
+.env

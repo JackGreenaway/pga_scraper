@@ -1,4 +1,5 @@
 import requests
+import re
 from datetime import datetime
 
 
@@ -40,3 +41,77 @@ class IdScraper:
         )
 
         return response
+
+    def __clean_tournament_ids(self, tournament_ids: dict) -> dict:
+
+        cleaned_tournament_data = []
+
+        for kt in ["completed", "upcoming"]:
+
+            if kt in tournament_ids.keys():
+
+                for tournament_month in tournament_ids[kt]:
+
+                    for tournament in tournament_month["tournaments"]:
+
+                        cleaned_tournament_data += [
+                            {
+                                "tournament_name": tournament["tournamentName"],
+                                "id": tournament["id"],
+                                "champion_earnings": "".join(
+                                    re.findall("\d+", tournament["championEarnings"])
+                                ),
+                                "purse": "".join(
+                                    re.findall("\d+", tournament["purse"])
+                                ),
+                                "currency": "".join(
+                                    re.findall("[$€£¥₹]", tournament["purse"])
+                                ),
+                                "city": tournament["city"],
+                                "country_code": tournament["countryCode"],
+                                "start_date": datetime.fromtimestamp(
+                                    tournament["startDate"] / 1000
+                                ),
+                                "tour_standing_value": tournament["tourStandingValue"],
+                                "course_name": tournament["courseName"],
+                            }
+                        ]
+
+        return cleaned_tournament_data
+
+    def scrape_unique_tournaments_in_range(
+        self,
+        min_year,
+        max_year,
+    ) -> dict:
+
+        self.tournament_metadata = []
+        for year in list(range(min_year, max_year + 1))[::-1]:
+
+            metadata = self.__clean_tournament_ids(
+                tournament_ids=self.scrape_tournament_schedule(year=year).json()[
+                    "data"
+                ]["schedule"]
+            )
+
+            self.tournament_metadata += metadata
+
+        return self.tournament_metadata
+
+    @property
+    def unique_tournaments(self) -> dict:
+
+        unique_tournaments = {}
+
+        for tournament in self.tournament_metadata:
+
+            # for key, value in pga_season.items():
+
+            if (
+                re.sub("\(\d{4}\)", "", tournament["tournament_name"]).strip()
+                not in unique_tournaments
+            ):
+
+                unique_tournaments[tournament["tournament_name"]] = tournament["id"]
+
+        return unique_tournaments
