@@ -1,6 +1,6 @@
 import polars as pl
 import os
-import warnings
+import logging
 
 from tqdm import tqdm
 from dotenv import load_dotenv
@@ -12,6 +12,19 @@ from src.pga_scraper.utils.frame_formatters import (
     format_tournament_metadata_frame,
 )
 
+# Setup logging configuration
+file_handler = logging.FileHandler("tournament_scraping.log")
+file_handler.setLevel(logging.INFO)  # Log info and above to the file
+
+stream_handler = logging.StreamHandler()
+stream_handler.setLevel(logging.ERROR)  # Log only errors and above to the console
+
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    level=logging.INFO,
+    handlers=[file_handler, stream_handler],
+)
+
 
 def main():
     """
@@ -21,13 +34,11 @@ def main():
 
     # Load environment variables from a .env file
     load_dotenv()
-
-    # Fetch the API key from environment variables
     API_KEY = os.getenv("API_KEY")
 
     # Define the year range for the data collection
-    min_year = 2010
-    max_year = 2024
+    min_year = 2020
+    max_year = 2025
 
     # Initialize the IdScraper with the provided API key
     id_scraper = IdScraper(api_key=API_KEY)
@@ -49,9 +60,7 @@ def main():
 
     print("Collecting tournament results data")
 
-    # Create a progress bar for tournaments
     tournament_pb = tqdm(unique_tournaments.items(), position=0)
-
     # Loop through each tournament and its corresponding ID
     for tournament, tournament_id in tournament_pb:
         tournament_pb.set_description(f"{tournament}")
@@ -67,9 +76,7 @@ def main():
         # Filter available years based on the minimum year
         target_years = [i for i in available_years if int(i["year"] / 10) >= min_year]
 
-        # Create a progress bar for years
         year_pb = tqdm(target_years, position=1, leave=False)
-
         # Loop through each target year for the tournament
         for tournament_year in year_pb:
             year_pb.set_description(f"Year: {tournament_year['year'] / 10:.0f}")
@@ -96,23 +103,27 @@ def main():
             # Attempt to concatenate the current data to the main DataFrame
             try:
                 tournament_df = pl.concat([tournament_df, temp_tournament_df])
+
             except Exception as e:
-                warnings.warn(
-                    f"Failed to concatenate data for year {tournament_year['year']} due to error: {e}",
-                    UserWarning,
+                logging.warning(
+                    f"failed to concatenate data for the `{tournament}`, id `{tournament_data_raw.json()['data']['tournamentPastResults']['id']}`, due to error: {e}.\n{tournament_data_raw.json()}\n"
                 )
 
     print("Exporting data")
 
     # Format and export the tournament results data to a parquet file
     tournament_df = format_tournament_results_frame(df=tournament_df)
-    tournament_df.write_parquet("data/pga_tournament_results_data_2020_2025.pq")
+    tournament_df.write_parquet(
+        f"data/pga_tournament_results_data_{min_year:.0f}_{max_year:.0f}.pq"
+    )
 
     # Format and export the tournament metadata to a parquet file
     tournament_metadata = format_tournament_metadata_frame(
         pl.DataFrame(tournament_metadata)
     )
-    tournament_metadata.write_parquet("data/pga_tournament_metadata_data_2020_2025.pq")
+    tournament_metadata.write_parquet(
+        f"data/pga_tournament_metadata_data_{min_year:.0f}_{max_year:.0f}.pq"
+    )
 
     # Print the shape (number of samples) of the exported data
     print(f"Tournament result data: {tournament_df.shape} samples")
