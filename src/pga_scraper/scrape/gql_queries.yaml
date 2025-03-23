@@ -1,0 +1,287 @@
+player_data:
+  player_profile: |
+    query Player($playerId: ID!) {
+      player(id: $playerId) {
+        bioLink
+        countryFlag
+        country
+        displayName
+        firstName
+        id
+        lastName
+        playerBio {
+          deceased
+          deceasedDate
+          age
+          birthplace {
+            countryCode
+            country
+            city
+            state
+            stateCode
+          }
+          born
+          bornAccessibilityText
+          degree
+          careerEarnings
+          family
+          graduationYear
+          heightImperial
+          heightImperialAccessibilityText
+          heightMeters
+          overview
+          personal
+          playsFrom {
+            city
+            country
+            countryCode
+            state
+            stateCode
+          }
+          pronunciation
+          residence {
+            city
+            country
+            state
+            countryCode
+            stateCode
+          }
+          school
+          social {
+            type
+            url
+          }
+          turnedPro
+          weightImperial
+          weightKilograms
+          websiteURL
+          exemptions {
+            tour
+            description
+            expirationDate
+          }
+        }
+        rank {
+          rank
+          statName
+        }
+        owgr
+      }
+    }
+    
+  player_career: |
+    query PlayerProfileCareer($playerId: String!, $tourCode: TourCode) {
+      playerProfileCareer(playerId: $playerId, tourCode: $tourCode) {
+        playerId
+        tourCode
+        events
+        wins
+        winsTitle
+        internationalWins
+        majorWins
+        cutsMade
+        runnerUp
+        second
+        third
+        top10
+        top25
+        years {
+          cutsMade
+          displaySeason
+          events
+          officialMoney
+          second
+          standingsPoints
+          standingsRank
+          third
+          top10
+          top25
+          tourCode
+          wins
+          withdrawn
+          year
+        }
+        officialMoney
+        tourPills {
+          tourCode
+          displayName
+        }
+        achievements {
+          title
+          value
+        }
+        tables {
+          tableName
+          tableDetail
+          rows {
+            rowTitle
+            rowTitleDetail
+            rowContent
+            secondContent
+          }
+        }
+        years {
+          tourCode
+          displaySeason
+          year
+          events
+          wins
+          second
+          third
+          top10
+          top25
+          cutsMade
+          withdrawn
+          officialMoney
+          standingsPoints
+          standingsRank
+        }
+      }
+    }
+
+tournament_data:
+  tournament_past_results: |
+    query TournamentPastResults($tournamentPastResultsId: ID!, $year: Int) {
+      tournamentPastResults(id: $tournamentPastResultsId, year: $year) {
+        id
+        players {
+          id
+          position
+          player {
+            id
+            firstName
+            lastName
+            shortName
+            displayName
+            abbreviations
+            abbreviationsAccessibilityText
+            amateur
+            country
+            countryFlag
+            lineColor
+          }
+          rounds {
+            score
+            parRelativeScore
+          }
+          additionalData
+          total
+          parRelativeScore
+        }
+        rounds
+        additionalDataHeaders
+        availableSeasons {
+          year
+          displaySeason
+        }
+        winner {
+          id
+          firstName
+          lastName
+          totalStrokes
+          totalScore
+          countryFlag
+          countryName
+          purse
+          points
+        }
+      }
+    }
+
+id_data:
+  tournament_schedule: |
+    query Schedule($tourCode: String!, $year: String, $filter: TournamentCategory) {
+      schedule(tourCode: $tourCode, year: $year, filter: $filter) {
+        completed {
+          month
+          year
+          monthSort
+          ...ScheduleTournament
+        }
+        filters {
+          type
+          name
+        }
+        seasonYear
+        tour
+        upcoming {
+          month
+          year
+          monthSort
+          ...ScheduleTournament
+        }
+      }
+    }
+
+    fragment ScheduleTournament on ScheduleMonth {
+      tournaments {
+        tournamentName
+        id
+        beautyImage
+        champion
+        champions {
+          displayName
+          playerId
+        }
+        championEarnings
+        championId
+        city
+        country
+        countryCode
+        courseName
+        date
+        dateAccessibilityText
+        purse
+        sortDate
+        startDate
+        state
+        stateCode
+        status {
+          roundDisplay
+          roundStatus
+          roundStatusColor
+          roundStatusDisplay
+        }
+        tournamentStatus
+        ticketsURL
+        tourStandingHeading
+        tourStandingValue
+        tournamentLogo
+        display
+        sequenceNumber
+        tournamentCategoryInfo {
+          type
+          logoLight
+          logoDark
+          label
+        }
+        tournamentSiteURL
+        tournamentStatus
+        useTournamentSiteURL
+      }
+    }
+
+  player_directory: |
+    query PlayerDirectory($tourCode: TourCode!, $active: Boolean) {
+      playerDirectory(tourCode: $tourCode, active: $active) {
+        tourCode
+        players {
+          id
+          isActive
+          firstName
+          lastName
+          shortName
+          displayName
+          alphaSort
+          country
+          countryFlag
+          headshot
+          playerBio {
+            id
+            age
+            education
+            turnedPro
+          }
+        }
+      }
+    }
