@@ -8,7 +8,9 @@ class IdScraper:
     def __init__(self, api_key: str) -> None:
         self.api_key = api_key
 
-        self.gql_queries = yaml.safe_load(open("gql_queries.yaml"))
+        self.gql_queries = yaml.safe_load(
+            open("src/pga_scraper/scrape/gql_queries.yaml")
+        )
 
     def scrape_tournament_schedule(
         self, year: int = datetime.now().year

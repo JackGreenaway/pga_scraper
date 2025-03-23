@@ -8,7 +8,9 @@ class TournamentDataScraper:
         self.api_key = api_key
         self.tournament_id = tournament_id
 
-        self.gql_queries = yaml.safe_load(open("gql_queries.yaml"))
+        self.gql_queries = yaml.safe_load(
+            open("src/pga_scraper/scrape/gql_queries.yaml")
+        )
 
     def tournament_avaliable_years_data(self) -> requests.Response:
         payload = {

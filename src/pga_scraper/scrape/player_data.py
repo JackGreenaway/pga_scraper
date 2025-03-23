@@ -8,7 +8,9 @@ class PlayerDataScraper:
         self.player_id = player_id
         self.tour_code = tour_code
 
-        self.gql_queries = yaml.safe_load(open("gql_queries.yaml"))
+        self.gql_queries = yaml.safe_load(
+            open("src/pga_scraper/scrape/gql_queries.yaml")
+        )
 
     def player_profile(self) -> requests.Response:
         payload = {
