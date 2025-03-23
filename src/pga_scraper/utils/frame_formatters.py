@@ -2,7 +2,6 @@ import polars as pl
 
 
 def format_tournament_metadata_frame(df: pl.DataFrame) -> pl.DataFrame:
-
     df = df.with_columns(
         pl.col("champion_earnings").str.replace("", "0").cast(float),
         pl.col("purse").str.replace("", "0").cast(float),
@@ -17,7 +16,6 @@ def format_tournament_metadata_frame(df: pl.DataFrame) -> pl.DataFrame:
 
 
 def format_tournament_results_frame(df: pl.DataFrame) -> pl.DataFrame:
-
     df = df.with_columns(
         pl.col("round_1").replace("-", None).replace("None", None).cast(float),
         pl.col("round_2").replace("-", None).replace("None", None).cast(float),

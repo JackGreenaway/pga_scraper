@@ -2,14 +2,12 @@ import requests
 
 
 class PlayerDataScraper:
-
     def __init__(self, api_key: str, player_id: str, tour_code: str = "R") -> None:
         self.api_key = api_key
         self.player_id = player_id
         self.tour_code = tour_code
 
     def player_profile(self) -> requests.Response:
-
         payload = {
             "operationName": "Player",
             "variables": {"playerId": self.player_id},
@@ -25,7 +23,6 @@ class PlayerDataScraper:
         return response
 
     def player_career(self) -> requests.Response:
-
         payload = {
             "operationName": "PlayerProfileCareer",
             "variables": {"playerId": self.player_id, "tourCode": self.tour_code},

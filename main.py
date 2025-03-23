@@ -37,7 +37,7 @@ def main():
     API_KEY = os.getenv("API_KEY")
 
     # Define the year range for the data collection
-    min_year = 2020
+    min_year = 2010
     max_year = 2025
 
     # Initialize the IdScraper with the provided API key

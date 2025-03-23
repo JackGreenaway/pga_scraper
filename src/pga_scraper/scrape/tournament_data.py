@@ -3,13 +3,11 @@ import numpy as np
 
 
 class TournamentDataScraper:
-
     def __init__(self, api_key: str, tournament_id: str):
         self.api_key = api_key
         self.tournament_id = tournament_id
 
     def tournament_avaliable_years_data(self) -> requests.Response:
-
         payload = {
             "operationName": "TournamentPastResults",
             "variables": {
@@ -28,7 +26,6 @@ class TournamentDataScraper:
         return response
 
     def tournament_result_data(self, year: int) -> requests.Response:
-
         payload = {
             "operationName": "TournamentPastResults",
             "variables": {
@@ -47,12 +44,10 @@ class TournamentDataScraper:
         return response
 
     def formatter(self, data: list[dict]) -> list[dict]:
-
         n_rounds = 4
         formatted_dict_list = []
 
         for index, entry in enumerate(data):
-
             player_data = entry["player"]
             rounds_data = entry.get("rounds", [])
 
@@ -63,7 +58,7 @@ class TournamentDataScraper:
                     "country": player_data.get("country", "Unknown"),
                     "amateur": player_data.get("amateur", False),
                     **{
-                        f"round_{i+1}": (
+                        f"round_{i + 1}": (
                             rounds_data[i]["score"]
                             if i < len(rounds_data)
                             else "None"  # I would rather this be None but Polras can get upset with different types
@@ -71,7 +66,7 @@ class TournamentDataScraper:
                         for i in range(n_rounds)
                     },
                     **{
-                        f"round_{i+1}_rel": (
+                        f"round_{i + 1}_rel": (
                             rounds_data[i]["parRelativeScore"]
                             if i < len(rounds_data)
                             else "None"
