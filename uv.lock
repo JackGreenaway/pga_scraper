@@ -657,7 +657,6 @@ dependencies = [
     { name = "pandas" },
     { name = "polars" },
     { name = "requests" },
-    { name = "ruff" },
     { name = "tqdm" },
 ]
 
@@ -667,6 +666,7 @@ dev = [
     { name = "matplotlib" },
     { name = "pandas" },
     { name = "pyarrow" },
+    { name = "ruff" },
 ]
 
 [package.metadata]
@@ -676,7 +676,6 @@ requires-dist = [
     { name = "pandas", specifier = ">=2.2.3" },
     { name = "polars", specifier = ">=1.25.2" },
     { name = "requests", specifier = ">=2.32.3" },
-    { name = "ruff", specifier = ">=0.11.2" },
     { name = "tqdm", specifier = ">=4.67.1" },
 ]
 
@@ -686,6 +685,7 @@ dev = [
     { name = "matplotlib", specifier = ">=3.10.1" },
     { name = "pandas", specifier = ">=2.2.3" },
     { name = "pyarrow", specifier = ">=19.0.1" },
+    { name = "ruff", specifier = ">=0.11.2" },
 ]
 
 [[package]]
