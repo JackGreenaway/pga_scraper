@@ -12,6 +12,7 @@ hello.py
 *.pq
 *.paqruet
 *.ipynb
+.ruff_cache
 !analysis.ipynb
 constants.py
 *.log
