@@ -1,4 +1,4 @@
-# PGA Tournament Data Scraper
+# PGA Tour Data Scraper
 
 This project scrapes data related to PGA tournaments from the PGA website API, collects tournament metadata and results, and exports the collected data to Parquet files for further analysis.
 
